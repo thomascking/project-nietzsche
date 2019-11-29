@@ -53,13 +53,34 @@ func loadTTF(path string, size float64) (font.Face, error) {
 //DrawText (t *pixel.Target, s []string, pos pixel.Vec, textColor color.RGBA)
 //draws the slice of strings at position pos with color textColor on the specified target T
 //target can be a window, canvas, or generic triangle
-func DrawText(t pixel.Target, s []string, v pixel.Vec, c color.RGBA) {
+//alignment 0 = left, 1 = center, 2 = right
+func DrawText(t pixel.Target, s []string, v pixel.Vec, c color.RGBA, alignment int) {
 	txt := text.New(v, Atlas)
 	txt.Color = c
 	for _, line := range s {
-		txt.Dot.X -= txt.BoundsOf(line).W() / 2
-		txt.Dot.Y -= txt.BoundsOf(line).H() / 2
+		currBounds := txt.BoundsOf(line)
+		switch alignment {
+		case 0:
+			break
+		case 1:
+			txt.Dot.X -= currBounds.W() / 2
+			break
+		case 2:
+			txt.Dot.X += currBounds.W() / 2
+			break
+		default:
+			txt.Dot.X += 0
+		}
 		fmt.Fprintln(txt, line)
 	}
-	txt.Draw(t, pixel.IM)
+	switch alignment {
+	case 0:
+		txt.Draw(t, pixel.IM.Moved(v))
+	case 1:
+		txt.Draw(t, pixel.IM.Moved(v))
+	case 2:
+		txt.Draw(t, pixel.IM.Moved(v))
+	default:
+		txt.Draw(t, pixel.IM)
+	}
 }

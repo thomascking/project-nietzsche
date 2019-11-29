@@ -29,9 +29,9 @@ func run() {
 	/* Engine Initializations Done */
 
 	worldMap := make(map[state.State]world.World)
-	worldMap[state.GS] = world.NewGameWorld(pixel.R(0, 0, 1024, 768)) // <- Breaks Here
+	worldMap[state.GS] = world.NewGameWorld(pixel.R(0, 0, 1024, 768))
 	worldMap[state.MS] = world.NewMenuWorld(pixel.R(0, 0, 1024, 768))
-	worldMap[state.PS] = world.NewWorld(pixel.R(0, 0, 1024, 768))
+	worldMap[state.PS] = world.NewPauseWorld(pixel.R(0, 0, 1024, 768))
 
 	last := time.Now()
 	for !win.Closed() {
@@ -46,7 +46,7 @@ func run() {
 		currWorld.Update(win, s)
 		currWorld.Draw()
 		currWorld.Render(win.Canvas())
-		ttscreen.DrawText(win.Canvas(), []string{fmt.Sprintf("FPS:%.2f", 1/s)}, pixel.V(30, 20), colornames.Green) // TODO: remove this, just for debugging
+		ttscreen.DrawText(win.Canvas(), []string{fmt.Sprintf("FPS:%.2f", 1/s)}, pixel.V(30, 20), colornames.Green, 0) // TODO: remove this, just for debugging
 		win.Update()
 		time.Sleep(time.Millisecond*17 - dt)
 	}

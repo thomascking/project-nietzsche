@@ -52,5 +52,5 @@ func (b *Button) Update(w *pixelgl.Window, _ float64) {
 //Draw draws the button on the screen
 func (b *Button) Draw(t *pixelgl.Canvas) {
 	b.g.Draw(t, pixel.IM.Moved(b.b.Center()))
-	ttscreen.DrawText(t, []string{b.s}, b.b.Center(), colornames.Red)
+	ttscreen.DrawText(t, []string{b.s}, b.b.Center(), colornames.Red, 2)
 }
