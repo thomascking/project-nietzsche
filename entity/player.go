@@ -23,10 +23,10 @@ func NewPlayer(location pixel.Matrix) *Player {
 }
 
 // Update update the player each loop
-func (p *Player) Update(win *pixelgl.Window) {
+func (p *Player) Update(w *pixelgl.Window) {
 }
 
 // Draw the player each loop
-func (p *Player) Draw(win *pixelgl.Window) {
-	p.sprite.Draw(win, p.matrix)
+func (p *Player) Draw(t *pixelgl.Canvas) {
+	p.sprite.Draw(t, p.matrix)
 }

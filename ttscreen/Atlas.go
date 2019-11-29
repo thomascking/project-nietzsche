@@ -51,13 +51,16 @@ func loadTTF(path string, size float64) (font.Face, error) {
 	}), nil
 }
 
-//DrawText (string,int,int) draws a string at x,y implicit to a window
-func DrawText(t *pixel.Target, s string, v pixel.Vec, c color.RGBA) {
-	fx := v.X
-	fy := v.Y
-	txt := text.New(pixel.V(fx, fy), atlas)
+//DrawText (t *pixel.Target, s []string, pos pixel.Vec, textColor color.RGBA)
+//draws the slice of strings at position pos with color textColor on the specified target T
+//target can be a window, canvas, or generic triangle
+func DrawText(t pixel.Target, s []string, v pixel.Vec, c color.RGBA) {
+	txt := text.New(v, atlas)
 	txt.Color = c
 	txt.LineHeight = atlas.LineHeight() * 1.25
-	fmt.Fprintln(txt, s)
-	txt.Draw(*t, pixel.IM.Scaled(txt.Orig, 2))
+	for _, line := range s {
+		txt.Dot.X -= txt.BoundsOf(line).W() / 2
+		fmt.Fprintln(txt, line)
+	}
+	txt.Draw(t, pixel.IM.Scaled(txt.Orig, 2))
 }

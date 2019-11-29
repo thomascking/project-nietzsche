@@ -7,8 +7,8 @@ import (
 
 // Entity type that is used to update and render entities in game
 type Entity interface {
-	Update(win *pixelgl.Window)
-	Draw(win *pixelgl.Window)
+	Update(w *pixelgl.Window)
+	Draw(t *pixelgl.Canvas)
 }
 
 // DefaultEntity normal entity to extend for Entities

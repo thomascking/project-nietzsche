@@ -3,41 +3,33 @@ package main
 import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
-	"github.com/thomascking/project-nietzsche/entity"
+	"github.com/thomascking/project-nietzsche/state"
 	"github.com/thomascking/project-nietzsche/ttscreen"
-	"golang.org/x/image/colornames"
+	"github.com/thomascking/project-nietzsche/world"
 )
-
-var entities []entity.Entity
 
 func run() {
 	cfg := pixelgl.WindowConfig{
 		Title:  "Nietzsche",
 		Bounds: pixel.R(0, 0, 1024, 768),
 	}
+
 	win, err := pixelgl.NewWindow(cfg)
-	ttscreen.InitText()
 	if err != nil {
 		panic(err)
 	}
 
-	player := entity.NewPlayer(pixel.IM.Moved(win.Bounds().Center()))
-	entities = append(entities, player)
+	worldMap := make(map[state.State]world.World)
+	worldMap[state.GS] = world.NewWorld(pixel.R(0, 0, 1024, 768)) // <- Breaks Here
+	worldMap[state.MS] = world.NewMenuWorld(pixel.R(0, 0, 1024, 768))
+	worldMap[state.PS] = world.NewWorld(pixel.R(0, 0, 1024, 768))
 
+	ttscreen.InitText()
 	for !win.Closed() {
-		win.Clear(colornames.White) //Set the background to white
-		for _, e := range entities {
-			e.Update(win)
-		}
-
-		for _, e := range entities {
-			e.Draw(win)
-		}
-
-		t := pixel.Target(win.Canvas())
-		px := win.Bounds().W()
-		py := win.Bounds().H()
-		ttscreen.DrawText(&t, "A Game for All and None", pixel.V((px/2)-160, py-25), colornames.Black)
+		currWorld := worldMap[state.CurrState]
+		currWorld.Update(win)
+		currWorld.Draw()
+		currWorld.Render(win.Canvas())
 		win.Update()
 	}
 }
