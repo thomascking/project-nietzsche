@@ -1,15 +1,16 @@
-package entity
+package graphics
 
 import (
 	"image"
 	"os"
 
-	_ "image/png"
+	_ "image/png" // so we can load png files
 
 	"github.com/faiface/pixel"
 )
 
-func loadSprite(path string, bounds pixel.Rect) (*pixel.Sprite, error) {
+// LoadSprite loads a sprite
+func LoadSprite(path string, bounds pixel.Rect) (*pixel.Sprite, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
