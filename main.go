@@ -28,7 +28,7 @@ func run() {
 	worldMap := make(map[state.State]world.World)
 	worldMap[state.GS] = world.NewGameWorld(pixel.R(0, 0, 640, 480))
 	worldMap[state.MS] = world.NewMenuWorld(pixel.R(0, 0, 1024, 768))
-	worldMap[state.PS] = world.NewWorld(pixel.R(0, 0, 1024, 768))
+	worldMap[state.PS] = world.NewPauseWorld(pixel.R(0, 0, 1024, 768))
 
 	last := time.Now()
 	for !win.Closed() {

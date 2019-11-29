@@ -4,6 +4,7 @@ import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/entity"
+	"github.com/thomascking/project-nietzsche/state"
 )
 
 //Game is a world
@@ -22,6 +23,9 @@ func NewGameWorld(b pixel.Rect) *Game {
 //Update Game
 func (g *Game) Update(w *pixelgl.Window, dt float64) {
 	g.DefaultWorld.Update(w, dt)
+	if w.JustPressed(pixelgl.KeyEscape) {
+		state.CurrState = state.PS
+	}
 }
 
 //Draw Game

@@ -12,4 +12,4 @@ const (
 )
 
 //CurrState is the current state
-var CurrState = GS // TODO: change back to MS
+var CurrState = MS // Default to menu
