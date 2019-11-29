@@ -7,7 +7,6 @@ import (
 	"unicode"
 
 	"github.com/faiface/pixel"
-	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
@@ -52,10 +51,10 @@ func loadTTF(path string, size float64) (font.Face, error) {
 }
 
 //DrawText (string,int,int) draws a string at x,y implicit to a window
-func DrawText(w *pixelgl.Window, s string, x int, y int) {
+func DrawText(t *pixel.Target, s string, x int, y int) {
 	fx, fy := float64(x), float64(y)
 	txt := text.New(pixel.V(fx, fy), atlas)
 	fmt.Fprintln(txt, s)
 	txt.LineHeight = atlas.LineHeight() * 1.25
-	txt.Draw(w, pixel.IM.Scaled(txt.Orig, 2))
+	txt.Draw(*t, pixel.IM.Scaled(txt.Orig, 2))
 }

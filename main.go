@@ -33,7 +33,8 @@ func run() {
 			e.Draw(win)
 		}
 
-		ttscreen.DrawText(win, "Hello, World!", 100, 500)
+		t := pixel.Target(win.Canvas())
+		ttscreen.DrawText(&t, "Hello, World!", 100, 500)
 		win.Update()
 	}
 }
