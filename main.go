@@ -5,6 +5,7 @@ import (
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/entity"
 	"github.com/thomascking/project-nietzsche/ttscreen"
+	"golang.org/x/image/colornames"
 )
 
 var entities []entity.Entity
@@ -24,7 +25,7 @@ func run() {
 	entities = append(entities, player)
 
 	for !win.Closed() {
-
+		win.Clear(colornames.White)
 		for _, e := range entities {
 			e.Update(win)
 		}
@@ -34,8 +35,9 @@ func run() {
 		}
 
 		t := pixel.Target(win.Canvas())
-		px := win.Bounds().Center()
-		ttscreen.DrawText(&t, "Hello, World!", px.Sub(pixel.V(500, 0)), px)
+		px := win.Bounds().W()
+		py := win.Bounds().H()
+		ttscreen.DrawText(&t, "A Game for All and None", pixel.V((px/2)-160, 0), pixel.V(0, py-25), colornames.Black)
 		win.Update()
 	}
 }

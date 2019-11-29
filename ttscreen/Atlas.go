@@ -2,6 +2,7 @@ package ttscreen
 
 import (
 	"fmt"
+	"image/color"
 	"io/ioutil"
 	"os"
 	"unicode"
@@ -51,10 +52,12 @@ func loadTTF(path string, size float64) (font.Face, error) {
 }
 
 //DrawText (string,int,int) draws a string at x,y implicit to a window
-func DrawText(t *pixel.Target, s string, x pixel.Vec, y pixel.Vec) {
-	fx, fy := x.X, y.Y
+func DrawText(t *pixel.Target, s string, x pixel.Vec, y pixel.Vec, c color.RGBA) {
+	fx := x.X
+	fy := y.Y
 	txt := text.New(pixel.V(fx, fy), atlas)
-	fmt.Fprintln(txt, s)
+	txt.Color = c
 	txt.LineHeight = atlas.LineHeight() * 1.25
+	fmt.Fprintln(txt, s)
 	txt.Draw(*t, pixel.IM.Scaled(txt.Orig, 2))
 }

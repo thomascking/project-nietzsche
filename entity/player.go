@@ -12,7 +12,7 @@ type Player struct {
 
 // NewPlayer create a new player
 func NewPlayer(location pixel.Matrix) *Player {
-	sprite, err := loadSprite("./images/meme (1).png", pixel.R(0, 0, 400, 300))
+	sprite, err := loadSprite("./images/player.png", pixel.R(0, 0, 400, 300))
 	if err != nil {
 		panic(err)
 	}
