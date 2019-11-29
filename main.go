@@ -5,7 +5,10 @@ import (
 
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
+	"github.com/thomascking/project-nietzsche/entity"
 )
+
+var entities []entity.Entity
 
 func run() {
 	cfg := pixelgl.WindowConfig{
@@ -17,7 +20,19 @@ func run() {
 		panic(err)
 	}
 
+	player := entity.NewPlayer(pixel.IM.Moved(win.Bounds().Center()))
+	entities = append(entities, player)
+
 	for !win.Closed() {
+
+		for _, e := range entities {
+			e.Update(win)
+		}
+
+		for _, e := range entities {
+			e.Draw(win)
+		}
+
 		win.Update()
 	}
 }
