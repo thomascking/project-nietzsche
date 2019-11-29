@@ -15,7 +15,7 @@ type Player struct {
 
 // NewPlayer create a new player
 func NewPlayer(p pixel.Vec) *Player {
-	a := graphics.NewAnimation("./images/walking.png")
+	a := graphics.NewAnimation("./images/walking.png", pixel.R(0, 0, 32, 32))
 	return &Player{a, p}
 }
 

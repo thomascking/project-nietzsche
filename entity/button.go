@@ -5,6 +5,7 @@ import (
 
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
+	"github.com/thomascking/project-nietzsche/graphics"
 	"github.com/thomascking/project-nietzsche/state"
 	"github.com/thomascking/project-nietzsche/ttscreen"
 	"golang.org/x/image/colornames"
@@ -21,7 +22,7 @@ type Button struct {
 
 // NewButton creates a button
 func NewButton(location pixel.Vec, text string, bounds pixel.Rect, f func()) *Button {
-	sprite, err := loadSprite("./images/black.png", bounds)
+	sprite, err := graphics.LoadSprite("./images/black.png", bounds)
 	if err != nil {
 		panic(err)
 	}
