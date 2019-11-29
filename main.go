@@ -25,7 +25,7 @@ func run() {
 	entities = append(entities, player)
 
 	for !win.Closed() {
-		win.Clear(colornames.White)
+		win.Clear(colornames.White) //Set the background to white
 		for _, e := range entities {
 			e.Update(win)
 		}
@@ -37,7 +37,7 @@ func run() {
 		t := pixel.Target(win.Canvas())
 		px := win.Bounds().W()
 		py := win.Bounds().H()
-		ttscreen.DrawText(&t, "A Game for All and None", pixel.V((px/2)-160, 0), pixel.V(0, py-25), colornames.Black)
+		ttscreen.DrawText(&t, "A Game for All and None", pixel.V((px/2)-160, py-25), colornames.Black)
 		win.Update()
 	}
 }
