@@ -11,7 +11,7 @@ import (
 type World interface {
 	AddEntity(e entity.Entity)
 	// removeEntity()
-	Update(w *pixelgl.Window)
+	Update(w *pixelgl.Window, dt float64)
 	Draw()
 	Render(c *pixelgl.Canvas)
 }
@@ -23,9 +23,9 @@ type DefaultWorld struct {
 }
 
 // Update for Base-Type DefaultWorld
-func (dw *DefaultWorld) Update(w *pixelgl.Window) {
+func (dw *DefaultWorld) Update(w *pixelgl.Window, dt float64) {
 	for _, e := range dw.Ents {
-		e.Update(w)
+		e.Update(w, dt)
 	}
 }
 

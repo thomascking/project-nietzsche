@@ -1,6 +1,7 @@
 package world
 
 import (
+	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/entity"
 )
@@ -10,13 +11,21 @@ type Game struct {
 	DefaultWorld
 }
 
+// NewGameWorld creates a game world
+func NewGameWorld(b pixel.Rect) *Game {
+	dw := NewWorld(b)
+	g := &Game{*dw}
+	g.AddEntity(entity.NewPlayer(pixel.V(100, 100)))
+	return g
+}
+
 //Update Game
-func (g *Game) Update(w *pixelgl.Window) {
-	g.DefaultWorld.Update(w)
+func (g *Game) Update(w *pixelgl.Window, dt float64) {
+	g.DefaultWorld.Update(w, dt)
 }
 
 //Draw Game
-func (g *Game) Draw(t *pixelgl.Canvas) {
+func (g *Game) Draw() {
 	g.DefaultWorld.Draw()
 }
 

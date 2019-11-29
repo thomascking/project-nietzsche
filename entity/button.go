@@ -1,12 +1,9 @@
 package entity
 
 import (
-	"fmt"
-
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/graphics"
-	"github.com/thomascking/project-nietzsche/state"
 	"github.com/thomascking/project-nietzsche/ttscreen"
 	"golang.org/x/image/colornames"
 )
@@ -36,13 +33,12 @@ func NewButton(text string, bounds pixel.Rect, f func()) *Button {
 }
 
 //Update updates the button
-func (b *Button) Update(w *pixelgl.Window) {
+func (b *Button) Update(w *pixelgl.Window, _ float64) {
 	if w.JustPressed(pixelgl.MouseButtonLeft) {
 		pos := w.MousePosition()
 		if b.b.Contains(pos) {
 			b.pressed = true
 		}
-		fmt.Println(state.CurrState)
 	}
 	if w.JustReleased(pixelgl.MouseButtonLeft) && b.pressed {
 		pos := w.MousePosition()

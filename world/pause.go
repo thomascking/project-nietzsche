@@ -11,12 +11,12 @@ type Pause struct {
 }
 
 //Update Pause
-func (p *Pause) Update(w *pixelgl.Window) {
-	p.DefaultWorld.Update(w)
+func (p *Pause) Update(w *pixelgl.Window, dt float64) {
+	p.DefaultWorld.Update(w, dt)
 }
 
 //Draw Pause
-func (p *Pause) Draw(t *pixelgl.Canvas) {
+func (p *Pause) Draw() {
 	p.DefaultWorld.Draw()
 }
 

@@ -39,8 +39,8 @@ func NewMenuWorld(b pixel.Rect) *Menu {
 }
 
 //Update Menu
-func (m *Menu) Update(w *pixelgl.Window) {
-	m.DefaultWorld.Update(w)
+func (m *Menu) Update(w *pixelgl.Window, dt float64) {
+	m.DefaultWorld.Update(w, dt)
 }
 
 //Draw Menu
