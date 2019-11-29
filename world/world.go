@@ -1,6 +1,8 @@
 package world
 
 import (
+	"math"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/entity"
@@ -39,7 +41,14 @@ func (dw *DefaultWorld) Draw() {
 
 //Render renderes canvas to window
 func (dw *DefaultWorld) Render(c *pixelgl.Canvas) {
-	dw.Canvas.Draw(c, pixel.IM.Moved(c.Bounds().Center()))
+	c.Clear(colornames.Black)
+	c.SetMatrix(pixel.IM.Scaled(pixel.ZV,
+		math.Min(
+			c.Bounds().W()/dw.Canvas.Bounds().W(),
+			c.Bounds().H()/dw.Canvas.Bounds().H(),
+		),
+	).Moved(c.Bounds().Center()))
+	dw.Canvas.Draw(c, pixel.IM)
 }
 
 //AddEntity adds entity to world's entity list
