@@ -13,37 +13,48 @@ import (
 
 // Button its a button
 type Button struct {
-	s string
-	v pixel.Vec
-	g *pixel.Sprite
-	b *pixel.Rect
-	f func()
+	pressed bool
+	s       string
+	g       *pixel.Sprite
+	b       pixel.Rect
+	f       func()
 }
 
 // NewButton creates a button
-func NewButton(location pixel.Vec, text string, bounds pixel.Rect, f func()) *Button {
-	sprite, err := graphics.LoadSprite("./images/black.png", bounds)
+func NewButton(text string, bounds pixel.Rect, f func()) *Button {
+	sprite, err := graphics.LoadSprite("./images/black.png", bounds.Moved(pixel.V(-bounds.Min.X, -bounds.Min.Y)))
 	if err != nil {
 		panic(err)
 	}
 	return &Button{
-		s: text,
-		v: location,
-		g: sprite,
-		f: f,
+		s:       text,
+		g:       sprite,
+		f:       f,
+		b:       bounds,
+		pressed: false,
 	}
 }
 
 //Update updates the button
 func (b *Button) Update(w *pixelgl.Window) {
 	if w.JustPressed(pixelgl.MouseButtonLeft) {
-		b.f()
+		pos := w.MousePosition()
+		if b.b.Contains(pos) {
+			b.pressed = true
+		}
 		fmt.Println(state.CurrState)
+	}
+	if w.JustReleased(pixelgl.MouseButtonLeft) && b.pressed {
+		pos := w.MousePosition()
+		if b.b.Contains(pos) {
+			b.f()
+		}
+		b.pressed = false
 	}
 }
 
 //Draw draws the button on the screen
 func (b *Button) Draw(t *pixelgl.Canvas) {
-	b.g.Draw(t, pixel.IM.Moved(b.v))
-	ttscreen.DrawText(t, []string{b.s}, b.v, colornames.White)
+	b.g.Draw(t, pixel.IM.Moved(b.b.Center()))
+	ttscreen.DrawText(t, []string{b.s}, b.b.Center(), colornames.Red)
 }

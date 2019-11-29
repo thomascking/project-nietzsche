@@ -8,6 +8,7 @@ const (
 	GS State = iota
 	MS
 	PS
+	ES
 )
 
 //CurrState is the current state
