@@ -20,7 +20,7 @@ func NewPlayer(p pixel.Vec) *Player {
 }
 
 // Update update the player each loop
-func (p *Player) Update(win *pixelgl.Window) {
+func (p *Player) Update(w *pixelgl.Window) {
 }
 
 // Draw the player each loop
