@@ -51,8 +51,8 @@ func loadTTF(path string, size float64) (font.Face, error) {
 }
 
 //DrawText (string,int,int) draws a string at x,y implicit to a window
-func DrawText(t *pixel.Target, s string, x int, y int) {
-	fx, fy := float64(x), float64(y)
+func DrawText(t *pixel.Target, s string, x pixel.Vec, y pixel.Vec) {
+	fx, fy := x.X, y.Y
 	txt := text.New(pixel.V(fx, fy), atlas)
 	fmt.Fprintln(txt, s)
 	txt.LineHeight = atlas.LineHeight() * 1.25

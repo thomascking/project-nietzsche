@@ -34,7 +34,8 @@ func run() {
 		}
 
 		t := pixel.Target(win.Canvas())
-		ttscreen.DrawText(&t, "Hello, World!", 100, 500)
+		px := win.Bounds().Center()
+		ttscreen.DrawText(&t, "Hello, World!", px.Sub(pixel.V(500, 0)), px)
 		win.Update()
 	}
 }
