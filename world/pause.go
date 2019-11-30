@@ -3,10 +3,8 @@ package world
 import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
-	"github.com/faiface/pixel/text"
 	"github.com/thomascking/project-nietzsche/entity"
 	"github.com/thomascking/project-nietzsche/state"
-	"github.com/thomascking/project-nietzsche/ttscreen"
 )
 
 //Pause is a world
@@ -18,19 +16,15 @@ type Pause struct {
 func NewPauseWorld(b pixel.Rect) *Pause {
 	dw := NewWorld(b)
 	p := &Pause{*dw}
-	txt := text.New(b.Center(), ttscreen.Atlas)
-	s := "Resume"
-	r := txt.BoundsOf(s)
-	p.AddEntity(entity.NewButton(s,
-		r.Resized(r.Center(), pixel.V(r.W()+13, r.H()+13)),
+	centerVec := b.Center()
+	p.AddEntity(entity.NewButton("./images/resume.png",
+		pixel.R(centerVec.X-(128/2), centerVec.Y, centerVec.X+(128/2), centerVec.Y+128),
 		func() {
 			state.CurrState = state.GS
 		}),
 	)
-	s = "EXIT"
-	r = txt.BoundsOf(s).Moved(pixel.V(0, r.H()+20))
-	p.AddEntity(entity.NewButton(s,
-		r.Resized(r.Center(), pixel.V(r.W()+13, r.H()+13)),
+	p.AddEntity(entity.NewButton("./images/exit.png",
+		pixel.R(centerVec.X-(128/2), centerVec.Y-64, centerVec.X+(128/2), centerVec.Y+64),
 		func() {
 			state.CurrState = state.ES
 		}),

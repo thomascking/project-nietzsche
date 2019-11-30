@@ -75,11 +75,11 @@ func DrawText(t pixel.Target, s []string, v pixel.Vec, c color.RGBA, alignment i
 	}
 	switch alignment {
 	case 0:
-		txt.Draw(t, pixel.IM.Moved(v))
+		txt.Draw(t, pixel.IM)
 	case 1:
-		txt.Draw(t, pixel.IM.Moved(v))
+		txt.Draw(t, pixel.IM)
 	case 2:
-		txt.Draw(t, pixel.IM.Moved(v))
+		txt.Draw(t, pixel.IM)
 	default:
 		txt.Draw(t, pixel.IM)
 	}
