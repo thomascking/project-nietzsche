@@ -3,10 +3,8 @@ package world
 import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
-	"github.com/faiface/pixel/text"
 	"github.com/thomascking/project-nietzsche/entity"
 	"github.com/thomascking/project-nietzsche/state"
-	"github.com/thomascking/project-nietzsche/ttscreen"
 )
 
 //Menu is a world
@@ -18,19 +16,14 @@ type Menu struct {
 func NewMenuWorld(b pixel.Rect) *Menu {
 	dw := NewWorld(b)
 	m := &Menu{*dw}
-	txt := text.New(b.Center(), ttscreen.Atlas)
-	s := "BEGIN!"
-	r := txt.BoundsOf(s)
-	m.AddEntity(entity.NewButton(s,
-		r.Resized(r.Center(), pixel.V(r.W()+13, r.H()+13)),
+	m.AddEntity(entity.NewButton("./images/begin.png",
+		pixel.R(0, 130, 128, 258),
 		func() {
 			state.CurrState = state.GS
 		}),
 	)
-	s = "EXIT"
-	r = txt.BoundsOf(s).Moved(pixel.V(0, r.H()+20))
-	m.AddEntity(entity.NewButton(s,
-		r.Resized(r.Center(), pixel.V(r.W()+13, r.H()+13)),
+	m.AddEntity(entity.NewButton("./images/exit.png",
+		pixel.R(0, 0, 128, 128),
 		func() {
 			state.CurrState = state.ES
 		}),
