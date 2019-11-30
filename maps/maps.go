@@ -4,11 +4,11 @@ import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/graphics"
-	"github.com/thomascking/project-nietzsche/world"
+	"github.com/thomascking/project-nietzsche/interfaces"
 )
 
 // Map is a map
-type Map func(w world.World)
+type Map func(w interfaces.World)
 
 // Maps the available maps
 var Maps = [1]Map{NewTestMap}
@@ -18,6 +18,8 @@ type fgEntity struct {
 }
 
 func (fg *fgEntity) Update(w *pixelgl.Window, dt float64) {}
+func (fg *fgEntity) SetWorld(w interfaces.World)          {}
+func (fg *fgEntity) GetType() string                      { return "map" }
 func (fg *fgEntity) Draw(t *pixelgl.Canvas) {
 	fg.sprite.Draw(t, pixel.IM.Moved(fg.sprite.Frame().Max.Scaled(.5)))
 }
@@ -27,6 +29,8 @@ type bgEntity struct {
 }
 
 func (bg *bgEntity) Update(w *pixelgl.Window, dt float64) {}
+func (bg *bgEntity) SetWorld(w interfaces.World)          {}
+func (bg *bgEntity) GetType() string                      { return "" }
 func (bg *bgEntity) Draw(t *pixelgl.Canvas) {
 	bg.sprite.Draw(t, pixel.IM.Moved(bg.sprite.Frame().Max.Scaled(.5)))
 }

@@ -5,23 +5,14 @@ import (
 
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
-	"github.com/thomascking/project-nietzsche/entity"
+	"github.com/thomascking/project-nietzsche/interfaces"
 	"golang.org/x/image/colornames"
 )
-
-// World type is an interface to DefaultWorld
-type World interface {
-	AddEntity(e entity.Entity)
-	// removeEntity()
-	Update(w *pixelgl.Window, dt float64)
-	Draw()
-	Render(c *pixelgl.Canvas)
-}
 
 // DefaultWorld the base world struct
 type DefaultWorld struct {
 	Canvas *pixelgl.Canvas
-	Ents   []entity.Entity
+	Ents   []interfaces.Entity
 }
 
 // Update for Base-Type DefaultWorld
@@ -52,15 +43,27 @@ func (dw *DefaultWorld) Render(c *pixelgl.Canvas) {
 }
 
 //AddEntity adds entity to world's entity list
-func (dw *DefaultWorld) AddEntity(e entity.Entity) {
+func (dw *DefaultWorld) AddEntity(e interfaces.Entity) {
 	dw.Ents = append(dw.Ents, e)
+	e.SetWorld(dw)
+}
+
+// CheckCollision checks for collision at given vec
+func (dw *DefaultWorld) CheckCollision(e interfaces.Entity, v pixel.Vec) []interfaces.Collision {
+	// loop through entities
+	// check intersection of bounds of the entities
+	// change collisionCanvas to bounds of the intersection
+	// clear to crazy color (magenta?)
+	// draw e and other entity
+	// check every pixel for not magenta
+	return nil
 }
 
 // NewWorld initalizes the world
 func NewWorld(b pixel.Rect) *DefaultWorld {
 	w := &DefaultWorld{
 		Canvas: pixelgl.NewCanvas(b),
-		Ents:   []entity.Entity{},
+		Ents:   []interfaces.Entity{},
 	} //Dynamically Allocate a world
 	return w
 }

@@ -5,6 +5,7 @@ import (
 
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
+	"github.com/thomascking/project-nietzsche/interfaces"
 	"github.com/thomascking/project-nietzsche/maps"
 	"github.com/thomascking/project-nietzsche/state"
 	"github.com/thomascking/project-nietzsche/ttscreen"
@@ -26,7 +27,7 @@ func run() {
 	ttscreen.InitText()
 	/* Engine Initializations Done */
 
-	worldMap := make(map[state.State]world.World)
+	worldMap := make(map[state.State]interfaces.World)
 	worldMap[state.GS] = world.NewGameWorld(pixel.R(0, 0, 640, 480))
 	maps.Maps[0](worldMap[state.GS])
 	worldMap[state.MS] = world.NewMenuWorld(pixel.R(0, 0, 1024, 768))

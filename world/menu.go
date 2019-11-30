@@ -4,6 +4,7 @@ import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/entity"
+	"github.com/thomascking/project-nietzsche/interfaces"
 	"github.com/thomascking/project-nietzsche/state"
 	"github.com/thomascking/project-nietzsche/ttscreen"
 	"golang.org/x/image/colornames"
@@ -47,6 +48,6 @@ func (m *Menu) Draw() {
 }
 
 //AddEntity adds an entity to the menu
-func (m *Menu) AddEntity(e entity.Entity) {
+func (m *Menu) AddEntity(e interfaces.Entity) {
 	m.DefaultWorld.AddEntity(e)
 }

@@ -4,6 +4,7 @@ import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/entity"
+	"github.com/thomascking/project-nietzsche/interfaces"
 	"github.com/thomascking/project-nietzsche/state"
 )
 
@@ -34,6 +35,6 @@ func (g *Game) Draw() {
 }
 
 //AddEntity adds an entity to the menu
-func (g *Game) AddEntity(e entity.Entity) {
+func (g *Game) AddEntity(e interfaces.Entity) {
 	g.DefaultWorld.AddEntity(e)
 }

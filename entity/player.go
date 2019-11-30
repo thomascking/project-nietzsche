@@ -5,6 +5,7 @@ import (
 	"github.com/faiface/pixel/pixelgl"
 
 	"github.com/thomascking/project-nietzsche/graphics"
+	"github.com/thomascking/project-nietzsche/interfaces"
 )
 
 const speed = 45
@@ -14,6 +15,7 @@ type Player struct {
 	animation *graphics.Animation
 	position  pixel.Vec
 	direction pixel.Vec
+	world     interfaces.World
 }
 
 // NewPlayer create a new player
@@ -32,7 +34,7 @@ func NewPlayer(p pixel.Vec) *Player {
 	a.AddAnimation("idle", []pixel.Rect{
 		pixel.R(0, 64, 32, 96),
 	})
-	return &Player{a, p, pixel.V(1, 1)}
+	return &Player{a, p, pixel.V(1, 1), nil}
 }
 
 // Update update the player each loop
@@ -54,4 +56,14 @@ func (p *Player) Update(w *pixelgl.Window, dt float64) {
 // Draw the player each loop
 func (p *Player) Draw(win *pixelgl.Canvas) {
 	p.animation.Draw(win, pixel.IM.Moved(p.position).ScaledXY(p.position, p.direction))
+}
+
+// SetWorld sets the world
+func (p *Player) SetWorld(w interfaces.World) {
+	p.world = w
+}
+
+// GetType player
+func (p *Player) GetType() string {
+	return "player"
 }

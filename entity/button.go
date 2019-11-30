@@ -4,6 +4,7 @@ import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/graphics"
+	"github.com/thomascking/project-nietzsche/interfaces"
 )
 
 // Button its a button
@@ -14,6 +15,7 @@ type Button struct {
 	b       pixel.Rect
 	frames  map[string]pixel.Rect
 	f       func()
+	world   interfaces.World
 }
 
 // NewButton creates a button
@@ -58,4 +60,14 @@ func (b *Button) Update(w *pixelgl.Window, _ float64) {
 		b.pressed = false
 		b.g.Set(b.g.Picture(), b.frames[""])
 	}
+}
+
+// SetWorld sets the world
+func (b *Button) SetWorld(w interfaces.World) {
+	b.world = w
+}
+
+// GetType stub
+func (b *Button) GetType() string {
+	return ""
 }
