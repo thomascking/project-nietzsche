@@ -16,14 +16,15 @@ type Menu struct {
 func NewMenuWorld(b pixel.Rect) *Menu {
 	dw := NewWorld(b)
 	m := &Menu{*dw}
+	centerVec := b.Center()
 	m.AddEntity(entity.NewButton("./images/begin.png",
-		pixel.R(0, 130, 128, 258),
+		pixel.R(centerVec.X-(128/2), centerVec.Y, centerVec.X+(128/2), centerVec.Y+128),
 		func() {
 			state.CurrState = state.GS
 		}),
 	)
 	m.AddEntity(entity.NewButton("./images/exit.png",
-		pixel.R(0, 0, 128, 128),
+		pixel.R(centerVec.X-(128/2), centerVec.Y-64, centerVec.X+(128/2), centerVec.Y+64),
 		func() {
 			state.CurrState = state.ES
 		}),

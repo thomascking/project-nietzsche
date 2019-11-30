@@ -16,14 +16,15 @@ type Pause struct {
 func NewPauseWorld(b pixel.Rect) *Pause {
 	dw := NewWorld(b)
 	p := &Pause{*dw}
+	centerVec := b.Center()
 	p.AddEntity(entity.NewButton("./images/resume.png",
-		pixel.R(0, 130, 128, 258),
+		pixel.R(centerVec.X-(128/2), centerVec.Y, centerVec.X+(128/2), centerVec.Y+128),
 		func() {
 			state.CurrState = state.GS
 		}),
 	)
 	p.AddEntity(entity.NewButton("./images/exit.png",
-		pixel.R(0, 0, 128, 128),
+		pixel.R(centerVec.X-(128/2), centerVec.Y-64, centerVec.X+(128/2), centerVec.Y+64),
 		func() {
 			state.CurrState = state.ES
 		}),

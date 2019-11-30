@@ -51,11 +51,11 @@ func (b *Button) Update(w *pixelgl.Window, _ float64) {
 		}
 	}
 	if w.JustReleased(pixelgl.MouseButtonLeft) && b.pressed {
-		b.g.Set(b.g.Picture(), b.frames[""])
 		pos := w.MousePosition()
 		if b.b.Contains(pos) {
 			b.f()
 		}
 		b.pressed = false
+		b.g.Set(b.g.Picture(), b.frames[""])
 	}
 }
