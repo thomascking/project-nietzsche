@@ -5,6 +5,8 @@ import (
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/thomascking/project-nietzsche/entity"
 	"github.com/thomascking/project-nietzsche/state"
+	"github.com/thomascking/project-nietzsche/ttscreen"
+	"golang.org/x/image/colornames"
 )
 
 //Menu is a world
@@ -40,6 +42,8 @@ func (m *Menu) Update(w *pixelgl.Window, dt float64) {
 //Draw Menu
 func (m *Menu) Draw() {
 	m.DefaultWorld.Draw()
+	centerLine := m.Canvas.Bounds()
+	ttscreen.DrawText(m.Canvas, []string{"A Game for All and None", "made by", "Thomas King and Taylor Lopez"}, pixel.V(centerLine.Center().X, centerLine.H()-128), colornames.Black, 1)
 }
 
 //AddEntity adds an entity to the menu
